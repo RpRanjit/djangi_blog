@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription Confirmation</title>
+    
+</head>
+<body>
+    <table class="main-table" width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+            <td class="header-cell">
+                <h1 class="header-title">Welcome to myBlog!</h1>
+            </td>
+        </tr>
+        <tr>
+            <td class="content-cell">
+                <h2 class="greeting">Hi {{ name }},</h2>
+                <p class="main-text">
+                    Thank you for subscribing to our newsletter using the email <strong>{{ email }}</strong>.
+                </p>
+                <p class="main-text">
+                    You'll now receive the latest updates, tips, and exclusive content straight to your inbox.
+                </p>
+                <p class="main-text">
+                    If you ever wish to unsubscribe, a link will be provided at the bottom of every email.
+                </p>
+
+                <hr class="divider">
+
+                <p class="footer-text">
+                    This email was sent to {{ email }} by MyNewsletter. <br>
+                    If you didn’t subscribe, please ignore this email.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td class="copyright-cell">
+                &copy; {{ year|default:"2025" }} MyNewsletter. All rights reserved.
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

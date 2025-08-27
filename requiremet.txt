@@ -1,0 +1,7 @@
+One a virtual env
+change directory to myblog
+in myblog/setting.py
+write your oen email in this
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')  # Your Gmail address
+makke sure your gmail is two way authenticated and below your own app password
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD') 

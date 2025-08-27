@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}{% endblock title %}</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <!-- FontAwesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <style>
+        /* Global Styles */
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4efe9 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        main {
+            flex: 1 0 auto;
+        }
+        
+        /* Header Styles */
+        .navbar {
+            padding: 12px 0;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.1);
+            background: linear-gradient(120deg, #17a2b8 0%, #138496 100%) !important;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-brand {
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            background: linear-gradient(to right, #ffffff, #e6f7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            padding: 8px 15px;
+            margin: 0 5px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            color: rgba(255,255,255,0.85) !important;
+        }
+        
+        .nav-link:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #fff;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        .nav-link:hover {
+            background-color: rgba(255,255,255,0.15);
+            transform: translateY(-2px);
+        }
+        
+        .nav-link:hover:before {
+            width: 70%;
+        }
+        
+        .auth-buttons .btn {
+            margin-left: 10px;
+            border-radius: 20px;
+            padding: 8px 20px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .auth-buttons .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        .search-form {
+            max-width: 400px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .search-form .form-control {
+            border: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding-left: 20px;
+        }
+        
+        .search-form .btn {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            color: #6c757d;
+        }
+
+        /* Main Content Area */
+        .main-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            margin: 30px auto;
+            padding: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .main-container:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, #17a2b8, #138496);
+        }
+
+        /* Footer Styles */
+        .footer {
+            background: linear-gradient(to right, #343a40, #23272b);
+            color: #fff;
+            padding: 50px 0 25px;
+            margin-top: auto;
+            position: relative;
+        }
+        
+        .footer:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(to right, #17a2b8, #138496);
+        }
+        
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(to right, #17a2b8, #20c997);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .footer-links h5 {
+            color: #fff;
+            margin-bottom: 20px;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-links h5:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: #17a2b8;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links li:hover {
+            transform: translateX(5px);
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: block;
+        }
+        
+        .footer-links a:hover {
+            color: #17a2b8;
+            padding-left: 5px;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            font-size: 18px;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            background: #17a2b8;
+            color: #fff;
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(23, 162, 184, 0.3);
+        }
+        
+        .copyright {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            margin-top: 30px;
+            color: rgba(255,255,255,0.6);
+        }
+        
+        .input-group {
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 30px;
+            overflow: hidden;
+        }
+        
+        .input-group .form-control {
+            border: none;
+            padding-left: 20px;
+        }
+        
+        .input-group .btn {
+            border-radius: 0 30px 30px 0;
+        }
+        
+        /* Animation for page content */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .main-container {
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        /* Decorative elements */
+        .bg-decoration {
+            position: fixed;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(23, 162, 184, 0.1) 0%, rgba(19, 132, 150, 0.05) 100%);
+            z-index: -1;
+        }
+        
+        .bg-decoration-1 {
+            top: 10%;
+            left: -100px;
+        }
+        
+        .bg-decoration-2 {
+            bottom: 10%;
+            right: -100px;
+        }
+
+        /* Dropdown menu styling */
+        .dropdown-menu {
+            border: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .dropdown-item {
+            transition: all 0.2s ease;
+        }
+        
+        .dropdown-item:hover {
+            background-color: #17a2b8;
+            color: white;
+            padding-left: 20px;
+        }
+
+        </style>
+        {% block detail_style %}
+        {% endblock detail_style %}
+        {% block list_style %}
+        
+        {% endblock list_style %}
+  </head>
+  <body>
+    <!-- Background decorations -->
+    <div class="bg-decoration bg-decoration-1"></div>
+    <div class="bg-decoration bg-decoration-2"></div>
+
+    <!-- Enhanced Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-info">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="{% url 'list' %}">myBlog</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'list' %}">Home</a>
+            </li>
+            <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Categories
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <li><a class="dropdown-item" href="{% url 'posts_by_category' 'News' %}">News</a></li>
+        <li><a class="dropdown-item" href="{% url 'posts_by_category' 'Sports' %}">Sports</a></li>
+        <li><a class="dropdown-item" href="{% url 'posts_by_category' 'Politics' %}">Politics</a></li>
+        <li><a class="dropdown-item" href="{% url 'posts_by_category' 'Technology' %}">Technology</a></li>
+        <li><a class="dropdown-item" href="{% url 'posts_by_category' 'Lifestyle' %}">Lifestyle</a></li>
+        <li><a class="dropdown-item" href="{% url 'posts_by_category' 'Business' %}">Business</a></li>
+        <li><a class="dropdown-item" href="{% url 'posts_by_category' 'Weather' %}">Weather</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="{% url 'list' %}">All Categories</a></li>
+    </ul>
+</li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'about_us' %}">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+            </li>
+          </ul>
+          
+          <form class="d-flex search-form me-3" action="{% url 'search' %}" method="GET">
+            {% csrf_token %}
+            <input
+              class="form-control me-2 rounded-pill"
+              type="search"
+              placeholder="Search articles..."
+              name="q"
+              aria-label="Search"
+            />
+            <button class="btn btn-outline-light rounded-pill" type="submit">
+              <i class="fas fa-search"></i>
+            </button>
+          </form>
+          
+          <!-- Replace the auth-buttons section with this -->
+<div class="auth-buttons d-flex">
+    {% if user.is_authenticated %}
+    <div class="dropdown">
+    <button class="btn btn-outline-light dropdown-toggle" type="button" id="userMenu" data-bs-toggle="dropdown">
+        <i class="fas fa-user-circle me-1"></i> {{ user.username }}
+    </button>
+    <ul class="dropdown-menu dropdown-menu-end">
+        <li><a class="dropdown-item" href="{% url 'profile' %}"><i class="fas fa-user me-2"></i>My Profile & Posts</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+    </ul>
+</div>
+    {% else %}
+    <a href="{% url 'sign_in' %}" class="btn btn-outline-light me-2">Sign In</a>
+    <a href="{% url 'register' %}" class="btn btn-success">Register</a>
+    {% endif %}
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <div class="container main-container">
+        {% block content %}
+        {% endblock %}
+      </div>
+    </main>
+
+    <!-- Enhanced Footer-->
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 mb-4">
+            <h5 class="footer-logo mb-3">myBlog</h5>
+            <p>A platform for sharing knowledge, experiences, and stories from around the world. Join our community of writers and readers today.</p>
+            <div class="social-icons mt-3">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#"><i class="fab fa-pinterest"></i></a>
+            </div>
+          </div>
+          
+          <div class="col-md-2 mb-4">
+            <h5>Quick Links</h5>
+            <ul>
+              <li><a href="{% url 'list' %}">Home</a></li>
+              <li><a href="{% url 'about_us' %}">About Us</a></li>
+              <li><a href="{% url 'posts_by_category' 'Sports' %}">Categories</a></li>
+              <li><a href="{% url 'contact' %}">Contact</a></li>
+            </ul>
+          </div>
+          
+          <div class="col-md-2 mb-4">
+            <h5>Categories</h5>
+            <ul>
+        <li><a href="{% url 'posts_by_category' 'Sports' %}">Sports</a></li>
+        <li><a href="{% url 'posts_by_category' 'Politics' %}">Politics</a></li>
+        <li><a href="{% url 'posts_by_category' 'Technology' %}">Technology</a></li>
+        <li><a href="{% url 'posts_by_category' 'Lifestyle' %}">Lifestyle</a></li>
+        <li><a href="{% url 'posts_by_category' 'Business' %}">Business</a></li>
+        <li><a href="{% url 'posts_by_category' 'Weather' %}">Weather</a></li>
+            </ul>
+          </div>
+          
+          <div class="col-md-4 mb-4">
+    <h5>Newsletter</h5>
+    <p>Subscribe to our newsletter for the latest updates and articles.</p>
+    <div class="mt-3">
+        <div class="input-group">
+            <input type="email" class="form-control" placeholder="Your Email">
+            <a href="{% url 'newsletter_index' %}" class="btn btn-primary">Subscribe</a>
+        </div>
+    </div>
+</div>
+        
+        <div class="row">
+          <div class="col-12 text-center copyright">
+            <p>&copy; 2025 myBlog. All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    {% block list_scripts %}
+    {% endblock list_scripts %}
+  </body>
+</html>

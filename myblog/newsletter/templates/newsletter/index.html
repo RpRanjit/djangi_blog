@@ -1,0 +1,42 @@
+{% extends "blog/base.html" %}
+{% block title %}myBlog - Subscribe{% endblock title %}
+
+{% block content %}
+<section class="py-5 bg-light">
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 text-center">
+        <h1 class="display-5 fw-bold mb-4">Subscribe to Our Newsletter</h1>
+        <p class="lead mb-5">
+          Get the latest articles and updates delivered straight to your inbox.
+        </p>
+        
+        <div class="card shadow-sm border-0 rounded-3">
+          <div class="card-body p-4 p-md-5">
+            <form class="needs-validation" novalidate method="POST">
+                {% csrf_token %}
+              <div class="mb-3">
+                <label for="id_name" class="form-label">Full Name</label>
+                {{ form.name }}
+                {% if form.name.errors %}
+                    <div class="text-danger small">{{ form.name.errors.0 }}</div>
+                {% endif %}
+              </div>
+              <div class="mb-3">
+                <label for="id_email" class="form-label">Email Address</label>
+                {{ form.email }}
+                {% if form.email.errors %}
+                    <div class="text-danger small">{{ form.email.errors.0 }}</div>
+                {% endif %}
+              </div>
+              <div class="d-grid">
+                <button type="submit" class="btn btn-primary btn-lg">Subscribe</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}

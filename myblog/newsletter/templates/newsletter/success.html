@@ -1,0 +1,17 @@
+{% extends "blog/base.html" %}
+
+{% block title %}Subscription Successful{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="alert alert-success shadow-sm text-center p-5 mt-4" role="alert">
+            <h2 class="mb-3">🎉 Thank You, {{ subscriber.name }}!</h2>
+            <p class="lead">You've successfully subscribed to our newsletter.</p>
+            <p class="text-muted">We'll be in touch soon at <strong>{{ subscriber.email }}</strong>.</p>
+
+            <a href="{% url 'list' %}" class="btn btn-outline-primary mt-4">← Back to Home</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
