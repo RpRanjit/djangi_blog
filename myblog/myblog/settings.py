@@ -26,7 +26,8 @@ SECRET_KEY = 'django-insecure-wd+@hagdvwy0634&)%uto$!cw#7_duib&9-$&wjp#iu2^v$4^4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["poranjit.pythonanywhere.com"]
+
 
 
 # Application definition
@@ -83,6 +84,8 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+
 
 
 # Password validation
