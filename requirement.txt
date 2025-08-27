@@ -1,2 +1,0 @@
-one a virtal env
-use your own email address and app password
